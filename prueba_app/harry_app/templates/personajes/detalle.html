@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center py-4">
+    <div class="col-lg-10">
+        <div class="card bg-dark border-warning shadow-lg overflow-hidden">
+            <div class="row g-0">
+                <div class="col-md-5">
+                    <img src="{{ personaje.imagen }}" class="img-fluid h-100 w-100"
+                        style="object-fit: cover; min-height: 450px;">
+                </div>
+                <div class="col-md-7 d-flex align-items-center">
+                    <div class="card-body p-5">
+                        <h2 class="display-4 fw-bold mb-0" style="color: #d3a625;">{{ personaje.nombre }}</h2>
+                        <h1>APODO: {{ personaje.apodo }}</h1>
+
+                        <div class="row mt-4">
+                            <div class="col-sm-6 mb-3">
+                                <label class="text-warning small text-uppercase fw-bold d-block">Casa de
+                                    Hogwarts</label>
+                                <span class="h5">{{ personaje.casa }}</span>
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <label class="text-warning small text-uppercase fw-bold d-block">Actor Original</label>
+                                <span class="h5">{{ personaje.actor }}</span>
+                            </div>
+                        </div>
+
+                        <hr class="border-secondary my-4">
+
+                        <a href="{% url 'lista_personajes' %}" class="btn btn-outline-warning btn-lg px-4 rounded-pill">
+                            Volver al Inicio
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

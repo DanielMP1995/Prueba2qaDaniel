@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="display-5 fw-bold" style="color: #d3a625;">Estudiantes y Profesores</h1>
+    <p class="text-secondary">El registro oficial del mundo mágico</p>
+</div>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+    {% for mago in page_obj %}
+    <div class="col">
+        <div class="card h-100 shadow-lg border-0">
+            <div class="overflow-hidden">
+                <img src="{{ mago.imagen }}" class="card-img-top" alt="{{ mago.nombre }}" 
+                     style="height: 280px; object-fit: cover; transition: transform .3s;">
+            </div>
+            <div class="card-body text-center">
+                <h5 class="card-title fw-bold">{{ mago.nombre }}</h5>
+                <p class="badge bg-dark border border-warning">{{ mago.casa }}</p>
+                <div class="mt-3">
+                    <a href="{% url 'detalle_personaje' mago.id %}" class="btn btn-magic btn-sm rounded-pill w-100">
+                        Mas Detalles
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<nav class="mt-5 pb-5">
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link bg-dark text-warning border-warning" href="?page=1">Inicio</a></li>
+            <li class="page-item"><a class="page-link bg-dark text-warning border-warning" href="?page={{ page_obj.previous_page_number }}">«</a></li>
+        {% endif %}
+
+        <li class="page-item active"><span class="page-link bg-warning text-dark border-warning fw-bold">{{ page_obj.number }}</span></li>
+
+        {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link bg-dark text-warning border-warning" href="?page={{ page_obj.next_page_number }}">»</a></li>
+            <li class="page-item"><a class="page-link bg-dark text-warning border-warning" href="?page={{ page_obj.paginator.num_pages }}">Fin</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+<style>
+    .card:hover img { transform: scale(1.1); }
+</style>
+{% endblock %}
